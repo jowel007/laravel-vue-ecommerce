@@ -11,16 +11,16 @@ use Auth;
 
 class AuthController extends Controller
 {
-    public function createAdmin()
-    {
-        $user         =  new User();
-        $user->name   =  'Admin';
-        $user->email   =  'admin@gmail.com';
-        $user->password = Hash::make('123456');
-        $user->save();
+    // public function createAdmin()
+    // {
+    //     $user         =  new User();
+    //     $user->name   =  'Admin';
+    //     $user->email   =  'admin@gmail.com';
+    //     $user->password = Hash::make('123456');
+    //     $user->save();
     
-        $admin = Role::where('slug','admin')->first();
+    //     $admin = Role::where('slug','admin')->first();
     
-        $user->roles()->attach($admin);
-    }
+    //     $user->roles()->attach($admin);
+    // }
 }

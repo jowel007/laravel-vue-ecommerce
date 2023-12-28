@@ -22,5 +22,9 @@
 	<link rel="stylesheet" href="{{ asset('backend') }}/assets/css/dark-theme.css" />
 	<link rel="stylesheet" href="{{ asset('backend') }}/assets/css/semi-dark.css" />
 	<link rel="stylesheet" href="{{ asset('backend') }}/assets/css/header-colors.css" />
+
+	<link rel="stylesheet" href="https://developercodez.com/developerCorner/parsley/parsley.css" >
+	<script src="{{ asset('backend') }}/assets/js/jquery.min.js"></script>
+
 	<title>Rocker - Bootstrap 5 Admin Dashboard Template</title>
 </head>
