@@ -26,12 +26,12 @@ class authController extends Controller
             return response()->json(['status'=> 400,'message'=>$validation->errors()->first()]);
         }else {
             $cred = array('email'=>$request->email,'password'=>$request->password);
-            
+
             //right auth
 
             if (Auth::attempt($cred,false)) {
                 if (Auth::User()->hasRole('admin')) {
-                    return response()->json(['status'=> 200,'message'=>'Admin User']);
+                    return response()->json(['status'=> 200,'message'=>'Admin User','url'=>'admin/dashboard']);
                 }else {
                     return response()->json(['status'=> 200,'message'=>'None User']);
                 }

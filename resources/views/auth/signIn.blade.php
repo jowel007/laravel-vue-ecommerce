@@ -87,7 +87,7 @@
             type: 'post',
             success: function(result) {
                 if (result.status == 200) {
-                    alert('Succesfully submit');
+                    window.location.href = result.url;
                 }else{
                     alert('Wrong Crendentias');
                 }
@@ -96,8 +96,8 @@
         }else{
             alert('Error Occur');
         }
-       
- 
+
+
     });
 </script>
 
