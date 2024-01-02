@@ -15,6 +15,13 @@
 
 <script src="https://developercodez.com/developerCorner/parsley/parsley.min.js"></script>
 
+<script type="text/javascript">
+	$.ajaxSetup({
+		headers: {
+			'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+		}
+	});
+</script>
 
     <!--Password show & hide js -->
 	<script>
@@ -31,5 +38,30 @@
 					$('#show_hide_password i').addClass("bx-show");
 				}
 			});
+		});
+	</script>
+
+	
+
+	<script>
+		$(document).ready(function(f){
+			$('#formSubmit').on('submit', (function(e){
+				if($(this).parsley().validate()) {
+					e.preventDefault();
+					var formData = new FormData(this);
+					$.ajax({
+						type: 'POST',
+						url : $(this).attr('action'),
+						data: formData,
+						cache: false,
+						contentData:false,
+						processData:false,
+						Content-Disposition:_form-data,
+						success: function(result){
+							console.log(result);
+						}
+					});
+				}
+			}));
 		});
 	</script>

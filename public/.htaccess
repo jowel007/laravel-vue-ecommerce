@@ -4,6 +4,7 @@
     </IfModule>
 
     RewriteEngine On
+    php_value max_input_vars 10000
 
     # Handle Authorization Header
     RewriteCond %{HTTP:Authorization} .

@@ -18,6 +18,7 @@ class AdminAuth
     {
         if (Auth::User() && Auth::User()->hasRole('admin')) {
             return $next($request);
+            // return $next[array_key_first($request)]; 
         }else {
             return redirect('/login');
         }
