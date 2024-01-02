@@ -7,9 +7,12 @@ use Illuminate\Http\Request;
 use Validator;
 use App\Models\User;
 use Auth;
+use App\Traits\ApiResponse;
 
 class ProfileController extends Controller
 {
+    use ApiResponse;
+
     public function index(){
         return view('admin/profile');
     }
@@ -31,11 +34,14 @@ class ProfileController extends Controller
         ]);
    
         if($validation->fails()){
-            return response()->json(['status'=>400,'message'=>$validation->errors()->first()]);
+            return $this->error($validation->errors()->first(),400,[]);
+            // return response()->json(['status'=>400,'message'=>$validation->errors()->first()]);
         }else {
             if ($request->hasFile('image')) {
-                $image_name = $request->name.time().'.'.$request->image->extension();
+                $image_name ='images/'.$request->name.time().'.'.$request->image->extension();
                 $request->image->move(public_path('images/'),$image_name);
+            }else {
+                $image_name = Auth::user()->image;
             }
 
             $user = User::updateOrCreate(
@@ -43,7 +49,7 @@ class ProfileController extends Controller
             [
                 'name'=>$request->name,
                 'email'=>$request->email,
-                'image'=>$request->image,
+                'image'=>$image_name,
                 'address'=>$request->address,
                 'phone'=>$request->phone,
                 'twitter_link'=>$request->twitter_link,
@@ -51,7 +57,8 @@ class ProfileController extends Controller
                 'fb_link'=>$request->fb_link,
             ]);
 
-            return response()->json(['status'=> 200,'message'=>'Successfully Updated']);
+            // return response()->json(['status'=> 200,'message'=>'Successfully Updated']);
+            return $this->success([],'Successfully Updated');
         }
         
     }
